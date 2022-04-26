@@ -29,15 +29,14 @@ int main()
     // glfw: initialize and configure
     // ------------------------------
     glfwInit();
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 3);
-    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 3);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MAJOR, 2);
+    glfwWindowHint(GLFW_CONTEXT_VERSION_MINOR, 1);
     glfwWindowHint(GLFW_OPENGL_PROFILE, GLFW_OPENGL_CORE_PROFILE);
 
 #ifdef __APPLE__
     glfwWindowHint(GLFW_OPENGL_FORWARD_COMPAT, GL_TRUE);
 #endif
 
-    // glfw window creation
     // --------------------
     GLFWwindow* window = glfwCreateWindow(SCR_WIDTH, SCR_HEIGHT, "LearnOpenGL", NULL, NULL);
     if (window == NULL)
@@ -46,9 +45,9 @@ int main()
         glfwTerminate();
         return -1;
     }
+    // glfw window creation
     glfwMakeContextCurrent(window);
     glfwSetFramebufferSizeCallback(window, framebuffer_size_callback);
-
     // glad: load all OpenGL function pointers
     // ---------------------------------------
     if (!gladLoadGLLoader((GLADloadproc)glfwGetProcAddress))
@@ -56,6 +55,22 @@ int main()
         std::cout << "Failed to initialize GLAD" << std::endl;
         return -1;
     }    
+
+	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VERSION));
+	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_VENDOR));
+	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_RENDERER));
+	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_SHADING_LANGUAGE_VERSION));
+	printf("OpenGL version supported by this platform (%s): \n", glGetString(GL_EXTENSIONS));
+	GLint maj, min;
+	glGetIntegerv(GL_MAJOR_VERSION, &maj);
+	glGetIntegerv(GL_MINOR_VERSION, &min);
+	std::cout << "Versin " << maj << " " << min << "\n";
+
+	//int maj2, min2;
+	//SDL_GL_GetAttribute(SDL_GL_CONTEXT_MAJOR_VERSION, &maj2);
+	//SDL_GL_GetAttribute(SDL_GL_CONTEXT_MINOR_VERSION, &min2);
+	//std::cout << "Versin " << maj2 << " " << min2 << "\n";
+
 
     // render loop
     // -----------
